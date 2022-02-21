@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     public Integer addUser(User user){
         return 1;
     }
