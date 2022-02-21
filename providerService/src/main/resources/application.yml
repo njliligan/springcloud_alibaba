@@ -3,6 +3,20 @@ spring:
     name: provider-service
   profiles:
     active: dev
+  datasource:
+    #    type: com.alibaba.druid.pool.DruidDataSource
+    #MySQL配置
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/miky?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+  #  jackson:
+  #    date-format: yyyy-MM-dd HH:mm:ss # 如果使用字符串表示，用这行设置格式
+  #    timezone: GMT+8
+  #mybatis-plus:
+  #  configuration:
+  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
   cloud:
     nacos:
       config:
@@ -10,4 +24,5 @@ spring:
         file-extension: yaml
         server-addr: 127.0.0.1:8848
         prefix: ${spring.application.name}
-        namespace: mall
+        namespace: provider
+  port: 8001
