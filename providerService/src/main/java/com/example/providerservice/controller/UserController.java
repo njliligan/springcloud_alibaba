@@ -2,6 +2,7 @@ package com.example.providerservice.controller;
 
 import com.njganlili.commonservice.model.User;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +19,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @PostMapping("/add")
+    @GetMapping("/add")
     public Integer addUser(User user){
         return 1;
     }

@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
  */
-@EnableAutoConfiguration
-@Configuration
-public class NacosConfigConfiguration {
-}
+//@EnableAutoConfiguration
+//@Configuration
+//public class NacosConfigConfiguration {
+//}
