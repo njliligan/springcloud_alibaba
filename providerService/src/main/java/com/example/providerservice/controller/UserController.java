@@ -17,8 +17,8 @@ import java.util.List;
 public class UserController {
 
     @PostMapping("/add")
-    public void addUser(User user){
-
+    public Integer addUser(User user){
+        return 1;
     }
 
 }
