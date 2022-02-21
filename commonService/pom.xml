@@ -5,12 +5,12 @@
     <parent>
         <groupId>com.njganlili</groupId>
         <artifactId>parent</artifactId>
-        <version>${revision}</version>
+        <version>1.0.0</version>
         <relativePath>../parent/pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.njganlili</groupId>
     <artifactId>commonService</artifactId>
-    <version>${revision}</version>
+    <version>1.0.0</version>
     <name>commonService</name>
     <description>commonService</description>
     <properties>

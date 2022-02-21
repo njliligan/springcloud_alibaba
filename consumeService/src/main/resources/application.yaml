@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: consumer-service
+  profiles:
+    active: dev
+  #  jackson:
+  #    date-format: yyyy-MM-dd HH:mm:ss # 如果使用字符串表示，用这行设置格式
+  #    timezone: GMT+8
+  #mybatis-plus:
+  #  configuration:
+  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        server-addr: 127.0.0.1:8848
+        prefix: ${spring.application.name}
+        group: DEV_GROUP
+      discovery:
+        enabled: true
+        group: DEV_GROUP
+        namespace: 3ee843f9-70ee-4701-9ad3-75aa5a35563b
+ribbon:
+
+
+server:
+  port: 8002
