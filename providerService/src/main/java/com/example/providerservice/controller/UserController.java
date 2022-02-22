@@ -1,6 +1,9 @@
 package com.example.providerservice.controller;
 
+import com.alibaba.nacos.api.config.annotation.NacosProperty;
+import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.njganlili.commonservice.model.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +22,18 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
+    @Value("${dates.b}")
+    private int b;
+
+    @Value("${nacos.info}")
+    private String info;
+
     @PostMapping("/add")
     public Integer addUser(User user){
-        return 1;
+        System.out.println("received msg.........");
+        System.out.println(b);
+        System.out.println(info);
+        return b;
     }
 
 }
