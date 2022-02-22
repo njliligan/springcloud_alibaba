@@ -11,17 +11,11 @@ spring:
   #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   cloud:
     nacos:
-      config:
-        file-extension: yaml
-        server-addr: 127.0.0.1:8848
-        prefix: ${spring.application.name}
-        group: DEV_GROUP
       discovery:
         enabled: true
         group: DEV_GROUP
         namespace: 3ee843f9-70ee-4701-9ad3-75aa5a35563b
-ribbon:
-
-
+        server-addr: 172.19.0.2:8848
+      server-addr: 172.19.0.2:8848
 server:
   port: 8002

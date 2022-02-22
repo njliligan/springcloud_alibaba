@@ -39,10 +39,16 @@ public class UserController {
     private FeignClients feignClients;
 
     @GetMapping("/addUser")
-    public void addUser(){
+    public void addUserByFeign(){
         User user = new User();
         Integer result = feignClients.addUser(user);
         logger.info(String.valueOf(result));
     }
+
+    @GetMapping("/addUserByRequestTemplate")
+    public void addUserByRequestTemplate(){
+
+    }
+
 
 }
