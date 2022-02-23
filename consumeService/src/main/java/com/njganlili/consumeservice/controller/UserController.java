@@ -2,12 +2,16 @@ package com.njganlili.consumeservice.controller;
 
 import com.njganlili.commonservice.model.User;
 import com.njganlili.consumeservice.fegin.FeignClients;
+import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Optional;
 
 /**
  * @author njgan
@@ -38,6 +42,12 @@ public class UserController {
     @Autowired
     private FeignClients feignClients;
 
+    //@Autowired
+    //private WebClient.Builder webClientBuilder;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
     @GetMapping("/addUser")
     public void addUserByFeign(){
         User user = new User();
@@ -45,9 +55,14 @@ public class UserController {
         logger.info(String.valueOf(result));
     }
 
-    @GetMapping("/addUserByRequestTemplate")
+    @GetMapping("/addUserByRestTemplate")
     public void addUserByRequestTemplate(){
-
+        String url = "http://provider-service/user/add";
+        User user =new User();
+        logger.info("sssssss");
+        Integer result =  restTemplate.postForObject(url,user,Integer.class);
+        Optional<Integer> optionalS = Optional.ofNullable(result);
+        System.out.println(optionalS.orElse(0));
     }
 
 
