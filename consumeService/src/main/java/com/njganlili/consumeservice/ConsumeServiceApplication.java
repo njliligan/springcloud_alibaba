@@ -22,7 +22,7 @@ public class ConsumeServiceApplication {
     }
 
     @Bean
-    @LoadBalanced
+//    @LoadBalanced //这里就必须使用服务名
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }

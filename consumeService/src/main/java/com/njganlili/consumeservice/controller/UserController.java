@@ -49,20 +49,23 @@ public class UserController {
     private RestTemplate restTemplate;
 
     @GetMapping("/addUser")
-    public void addUserByFeign(){
+    public Integer addUserByFeign(){
         User user = new User();
         Integer result = feignClients.addUser(user);
         logger.info(String.valueOf(result));
+        return result;
     }
 
     @GetMapping("/addUserByRestTemplate")
-    public void addUserByRequestTemplate(){
-        String url = "http://provider-service/user/add";
+    public Integer addUserByRequestTemplate(){
+//        String url = "http://provider-service/user/add";
+        String url = "http://127.0.0.1:8003/user/add";
         User user =new User();
         logger.info("sssssss");
         Integer result =  restTemplate.postForObject(url,user,Integer.class);
         Optional<Integer> optionalS = Optional.ofNullable(result);
         System.out.println(optionalS.orElse(0));
+        return result;
     }
 
 
