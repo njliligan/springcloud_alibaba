@@ -2,21 +2,22 @@ spring:
   application:
     name: consumer-service
   profiles:
-    active: dev
-  #  jackson:
-  #    date-format: yyyy-MM-dd HH:mm:ss # 如果使用字符串表示，用这行设置格式
-  #    timezone: GMT+8
-  #mybatis-plus:
-  #  configuration:
-  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  cloud:
-    nacos:
-      discovery:
-        enabled: true
-        group: DEV_GROUP
-        namespace: 3ee843f9-70ee-4701-9ad3-75aa5a35563b
-#        server-addr: 172.19.0.2:8848
-#      server-addr: 172.19.0.2:8848
-      server-addr: 127.0.0.1:8848
+    active: local
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss # 如果使用字符串表示，用这行设置格式
+    timezone: GMT+8
+  mybatis-plus:
+    configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+springdoc:
+  swagger-ui:
+    display-request-duration: true
+    operationsSorter: method
+    disable-swagger-default-url: true
+    use-root-path: true
+    path: /api/docs
+    enabled: true
+    csrf:
+      enabled: false
 server:
-  port: 8002
+  port: 8004
