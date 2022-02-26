@@ -1,29 +1,19 @@
 package com.njganlili.consumeservice.controller;
 
 import com.njganlili.commonservice.model.User;
-import com.njganlili.consumeservice.fegin.FeignClients;
+import com.njganlili.interfaces.consumer.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
-import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.security.OAuthFlow;
-import io.swagger.v3.oas.annotations.security.OAuthFlows;
-import io.swagger.v3.oas.annotations.security.OAuthScope;
-import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.checkerframework.checker.units.qual.A;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
@@ -41,7 +31,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
-@Tag(name = "放款申请Controller",description = "放款申请Controller")
+@Tag(name = "UserController",description = "用户操作")
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -61,23 +51,18 @@ public class UserController {
     //            <artifactId>feign-httpclient</artifactId>
     //            <version>10.2.3</version>
     //        </dependency>
-    @Autowired
-    private FeignClients feignClients;
 
-    //@Autowired
-    //private WebClient.Builder webClientBuilder;
+//    @Autowired
+//    private RestTemplate restTemplate;
 
-    @Autowired
-    private RestTemplate restTemplate;
-
+    @DubboReference
+    private UserService userService;
 
     /**
      * 通过feign添加用户
      * @return
      */
-    @Scheduled
-    @GetMapping(value = "/addUser", consumes = { "application/json", "application/xml", "application/x-www-form-urlencoded" })
-    @Operation(summary = "保存放款申请",description = "保存放款申请",method = "get")
+    @Operation(summary = "通过feign添加用户",description = "通过feign添加用户")
     @ApiResponses(
             value ={
                     @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = User.class))),
@@ -85,16 +70,15 @@ public class UserController {
                     @ApiResponse(responseCode = "404", description = "Order not found", content = @Content)
             }
     )
-//    @RequestBody(
-//            content = @Content(schema = @Schema(implementation = User.class))
+//    @Parameters(
+//            value = {
+//                    @Parameter(required = false,schema = @Schema(implementation = User.class))
+//            }
 //    )
-    @Parameters(
-            value = {
-                    @Parameter(required = false,schema = @Schema(implementation = User.class))
-            }
-    )
-    public Integer addUserByFeign(User user){
-        Integer result = feignClients.addUser(user);
+    @PostMapping(value = "/addUser", consumes = { "application/json", "application/xml", "application/x-www-form-urlencoded" })
+    public Integer addUserByFeign(@RequestBody User user){
+//        Integer result = feignClients.addUser(user);
+        Integer result = userService.addUser(user);
         logger.info(String.valueOf(result));
         return result;
     }
@@ -103,13 +87,15 @@ public class UserController {
      * 通过restTemplate添加用户
      * @return
      */
+    @Operation(summary = "通过restTemplate添加用户",description = "通过restTemplate添加用户")
     @GetMapping("/addUserByRestTemplate")
     public Integer addUserByRequestTemplate(){
 //        String url = "http://provider-service/user/add";
         String url = "http://127.0.0.1:8003/user/add";
         User user =new User();
         logger.info("sssssss");
-        Integer result =  restTemplate.postForObject(url,user,Integer.class);
+//        Integer result =  restTemplate.postForObject(url,user,Integer.class);
+        Integer result = Integer.valueOf(10);
         Optional<Integer> optionalS = Optional.ofNullable(result);
         System.out.println(optionalS.orElse(0));
         return result;

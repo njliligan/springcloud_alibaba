@@ -8,7 +8,6 @@
         <version>1.0.0</version>
         <relativePath>../parent/pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.njganlili</groupId>
     <artifactId>commonService</artifactId>
     <version>1.0.0</version>
     <name>commonService</name>
@@ -18,17 +17,13 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-commons</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-javadoc</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springdoc</groupId>-->
+<!--            <artifactId>springdoc-openapi-javadoc</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>

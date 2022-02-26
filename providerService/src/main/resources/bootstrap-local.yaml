@@ -13,3 +13,29 @@ spring:
         enabled: true
         group: DEV_GROUP
         namespace: 3ee843f9-70ee-4701-9ad3-75aa5a35563b
+dubbo:
+  # 配置服务信息
+  scan:
+    base-packages: com/njganlili/providerservice/service/impl
+  application:
+    name: service-provider
+    # 禁用QOS同一台机器可能会有端口冲突现象
+    qos-enable: false
+    qos-accept-foreign-ip: false
+  # 配置注册中心
+  registry:
+    address: nacos://localhost:8848
+    check: true
+  # 设置协议-协议由提供方指定消费方被动接受
+  protocol:
+    name: dubbo
+    port: 20880
+    dispatcher: all
+    threadpool: fixed
+    threads: 20
+  consumer:
+    retries: 2
+  provider:
+    retries: 2
+  cloud:
+    subscribed-services: service-consumer

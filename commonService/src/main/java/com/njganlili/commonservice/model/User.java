@@ -3,12 +3,9 @@ package com.njganlili.commonservice.model;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author njgan
- * @description
- * @date 2022/2/13 1:03
- */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.Valid;
@@ -16,14 +13,19 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-12-02T19:53:02.467132-01:00[Atlantic/Azores]")
-//@JacksonXmlRootElement(localName = "order")
+/**
+ * @author njgan
+ * @description
+ * @date 2022/2/13 1:03
+ */
+@javax.annotation.Generated(value = "org.springdoc.demo.app2.codegen.languages.SpringCodegen", date = "2019-07-11T00:09:29.839+02:00[Europe/Paris]")
+@JacksonXmlRootElement(localName = "order")
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User implements Serializable {
 
     @JsonProperty("userName")
-//    @JacksonXmlProperty(localName = "id")
+    @JacksonXmlProperty(localName = "id")
     @Schema(description = "Updated name of the pet")
     private String userName;
 

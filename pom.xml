@@ -15,6 +15,7 @@
         <module>providerService</module>
         <module>consumeService</module>
         <module>commonService</module>
+        <module>interfaces</module>
     </modules>
 
     <properties>

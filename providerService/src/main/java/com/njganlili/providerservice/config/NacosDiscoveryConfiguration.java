@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.providerservice.config;
+package com.njganlili.providerservice.config;
 
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
