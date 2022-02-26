@@ -1,0 +1,44 @@
+version: "3.1"
+services:
+  # seata服务1
+  seata-server-1:
+    image: seataio/seata-server:1.4.2
+    hostname: seata-server
+    ports:
+      - "8091:8091"
+    environment:
+      # 指定seata服务启动端口
+      - SEATA_PORT=8091
+      # 注册到nacos上的ip。客户端将通过该ip访问seata服务。
+      # 注意公网ip和内网ip的差异。
+      - SEATA_IP=172.18.0.6
+      - SEATA_CONFIG_NAME=file:/root/seata-config/registry
+    volumes:
+    # 需要把file.conf和registry.conf都放到./seata-server/config文件夹中
+      - "/home/miky/seata/seata-server/config:/root/seata-config"
+    networks:
+      example_default:
+        ipv4_address: 172.18.0.6
+  # seata服务2
+  seata-server-2:
+    image: seataio/seata-server:1.4.2
+    hostname: seata-server
+    ports:
+      - "8092:8091"
+    environment:
+      # 指定seata服务启动端口
+      - SEATA_PORT=8091
+      # 注册到nacos上的ip。客户端将通过该ip访问seata服务。
+      # 注意公网ip和内网ip的差异。
+      - SEATA_IP=172.18.0.7
+      - SEATA_CONFIG_NAME=file:/root/seata-config/registry
+    volumes:
+    # 需要把file.conf和registry.conf都放到./seata-server/config文件夹中
+      - "/home/miky/seata/seata-server/config:/root/seata-config"
+    networks:
+      example_default:
+        ipv4_address: 172.18.0.7
+networks:
+  example_default:
+    external: true
+  # seata服务3......seata服务N

@@ -1,0 +1,38 @@
+version: "2"
+services:
+  nacos:
+    image: nacos/nacos-server:latest
+    container_name: nacos
+    env_file:
+      - ./nacos-standlone-mysql.env
+    volumes:
+      - ./standalone-logs/:/home/nacos/logs
+      - ./init.d/custom.properties:/home/nacos/init.d/custom.properties
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9555:9555"
+    depends_on:
+      - mysql
+    restart: always
+    networks:
+      example_default:
+        ipv4_address: 172.18.0.2
+  mysql:
+    container_name: mysql
+    image: nacos/nacos-mysql:8.0.16
+    env_file:
+      - ./mysql.env
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      example_default:
+        ipv4_address: 172.18.0.3
+networks:
+  example_default:
+    external: true
+
+

@@ -6,7 +6,7 @@
         <groupId>com.njganlili</groupId>
         <artifactId>parent</artifactId>
         <version>1.0.0</version>
-        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>interfaces</artifactId>
     <version>1.0.0</version>

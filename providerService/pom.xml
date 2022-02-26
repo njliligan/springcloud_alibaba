@@ -25,7 +25,12 @@
             <artifactId>commonService</artifactId>
             <version>1.0.0</version>
         </dependency>
-<!--            Dubbo-->
+<!--        Seata-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+        </dependency>
+<!--        Dubbo-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-dubbo</artifactId>

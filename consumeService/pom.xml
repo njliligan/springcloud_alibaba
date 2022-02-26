@@ -16,6 +16,10 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+        </dependency>
 <!--            Dubbo-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
