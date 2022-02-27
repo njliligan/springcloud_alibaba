@@ -92,10 +92,10 @@ seata:
   enabled: true  # 开启自动配置
   #将 RM 管理的本地事物注册到seata-server,application-id的名称跟微服务名相同即可，启动日志可验证
   application-id: ${spring.application.name}
-  tx-service-group: my_test_tx_group
+  tx-service-group: default_tx_group
   service: #seata-server对于微服务来说是server,但是seata-server对于nacos来说就是client客户端
     vgroupMapping:
-      my_test_tx_group: default
+      default_tx_group: default
     grouplist: #
       default: 127.0.0.1:8091;127.0.0.1:8092
   registry:

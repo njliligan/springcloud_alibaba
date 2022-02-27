@@ -1,9 +1,10 @@
 package com.njganlili.consumeservice.controller;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import com.njganlili.commonservice.entity.User;
+import com.njganlili.commonservice.util.SnowFlakeService;
 import com.njganlili.interfaces.provider.service.UserService;
+import io.seata.spring.annotation.GlobalTransactional;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -28,9 +30,13 @@ import java.util.Optional;
 @Tag(name = "UserController",description = "用户操作")
 public class UserController {
 
+    public static  int a =0;
+
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     @DubboReference
     private UserService userService;
+
+    private SnowFlakeService snowFlakeService;
 
     /**
      * 通过feign添加用户
@@ -46,6 +52,7 @@ public class UserController {
     )
 
     @PostMapping(value = "/addUser", consumes = { "application/json", "application/xml", "application/x-www-form-urlencoded" })
+    @GlobalTransactional
     public Integer addUserByFeign(@RequestBody User user){
         user.setUserName("miky");
         user.setUserAge(0);
@@ -56,8 +63,13 @@ public class UserController {
         user.setCreatedTime(LocalDateTime.now());
         user.setUpdatedBy("miky");
         user.setUpdatedTime(LocalDateTime.now());
-        user.setId(Integer.getInteger(String.valueOf(Math.random()*(1000))).toString());
+        user.setId(String.valueOf(snowFlakeService.getNextId()));
         Integer result = userService.addUser(user);
+        if (Math.random() > 0.5){
+            throw new RuntimeException();
+        }else {
+            System.out.println(++a);
+        }
         logger.info(String.valueOf(result));
         return result;
     }
@@ -78,9 +90,9 @@ public class UserController {
         user.setUserIdCard("111111111111");
         user.setRevision("2");
         user.setCreatedBy("miky");
-        user.setCreatedTime(LocalDateTime.now());
+//        user.setCreatedTime(LocalDateTime.now());
         user.setUpdatedBy("miky");
-        user.setUpdatedTime(LocalDateTime.now());
+//        user.setUpdatedTime(LocalDateTime.now());
         user.setId(Integer.getInteger(String.valueOf(Math.random()*(1000))).toString());
 
         logger.info("sssssss");
