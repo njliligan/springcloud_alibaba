@@ -13,6 +13,13 @@ spring:
         enabled: true
         group: DEV_GROUP
         namespace: 3ee843f9-70ee-4701-9ad3-75aa5a35563b
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    #MySQL配置
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/miky?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false
+    username: root
+    password: root
 dubbo:
   # 配置服务信息
   scan:
@@ -40,40 +47,79 @@ dubbo:
   cloud:
     subscribed-services: service-consumer
 # seata相关配置
+#seata:
+#  service:
+#    grouplist:
+#      default: 127.0.0.1:8091
+#
+#    vgroup-mapping:
+#
+#      service_tx_group: default
+#      enable-degrade: false
+#      disable-global-transaction: false
+#  enabled: true
+#  application-id: ${spring.application.name}
+#  tx-service-group: service_tx_group
+#  client:
+#    tm:
+#      commit-retry-count: 3
+#      rollback-retry-count: 3
+#    rm:
+#      report-success-enable: true
+#      table-meta-check-enable: true
+#      report-retry-count: 5
+#      async-commit-buffer-limit: 1000
+#  transport: # Netty相关配置start
+#    type: TCP
+#    server: NIO
+#    heartbeat: true
+#    serialization: seata
+#    compressor: none
+#    enable-client-batch-send-request: true #客户端事务消息请求是否批量合并发送(默认true)
+#    shutdown:
+#      wait: 3
+#    thread-factory:
+#      boss-thread-prefix: NettyBoss
+#      worker-thread-prefix: NettyServerNIOWorker
+#      server-executor-thread-prefix: NettyServerBizHandler
+#      share-boss-worker: false
+#      client-selector-thread-prefix: NettyClientSelector
+#      client-selector-thread-size: 1
+#      client-worker-thread-prefix: NettyClientWorkerThread
+
+# seata配置
 seata:
-  service:
-    grouplist:
-      default: 127.0.0.1:8091
-    vgroup-mapping:
-      service_tx_group: default
-      enable-degrade: false
-      disable-global-transaction: false
-  enabled: true
+  enabled: true  # 开启自动配置
+  #将 RM 管理的本地事物注册到seata-server,application-id的名称跟微服务名相同即可，启动日志可验证
   application-id: ${spring.application.name}
-  tx-service-group: service_tx_group
-  client:
-    tm:
-      commit-retry-count: 3
-      rollback-retry-count: 3
-    rm:
-      report-success-enable: true
-      table-meta-check-enable: true
-      report-retry-count: 5
-      async-commit-buffer-limit: 1000
-  transport: # Netty相关配置start
-    type: TCP
-    server: NIO
-    heartbeat: true
-    serialization: seata
-    compressor: none
-    enable-client-batch-send-request: true #客户端事务消息请求是否批量合并发送(默认true)
-    shutdown:
-      wait: 3
-    thread-factory:
-      boss-thread-prefix: NettyBoss
-      worker-thread-prefix: NettyServerNIOWorker
-      server-executor-thread-prefix: NettyServerBizHandler
-      share-boss-worker: false
-      client-selector-thread-prefix: NettyClientSelector
-      client-selector-thread-size: 1
-      client-worker-thread-prefix: NettyClientWorkerThread
+  tx-service-group: my_test_tx_group
+  service: #seata-server对于微服务来说是server,但是seata-server对于nacos来说就是client客户端
+    vgroupMapping:
+      my_test_tx_group: default
+    grouplist: #
+      default: 127.0.0.1:8091;127.0.0.1:8092
+  registry:
+    nacos:
+      server-addr: 172.18.0.2:8848
+      application: seata-server
+      group: SEATA_GROUP
+#  config: #这里说明的是config.txt(也就是file.conf)中的配置信息到底在nacos注册中心nacos的哪里
+#    type: nacos
+#    nacos:
+#      namespace: ""
+#      serverAddr: 192.168.35.135:7011
+#      group: SEATA_GROUP
+#      userName: "nacos"
+#      password: "nacos"
+
+#  registry:  # 这里配置说明的是seata-server注册到nacos的哪个地方
+#    type: nacos
+#    nacos:
+#      application: seata-server
+#      server-addr: 192.168.35.135:7011
+#      namespace: "e9f23f54-2444-4ebc-80e4-4072459ebc5d"
+#      userName: "nacos"
+#      password: "nacos"
+
+
+#  sh nacos-config.sh -h localhost -p 8848 -g SEATA_GROUP -t 084bf2e3-d5bb-4f7d-8ecb-e2d2394ba4cc -u nacos -w nacos

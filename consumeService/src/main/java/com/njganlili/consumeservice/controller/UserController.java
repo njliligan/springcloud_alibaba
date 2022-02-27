@@ -1,7 +1,8 @@
 package com.njganlili.consumeservice.controller;
+import java.util.Date;
 
-import com.njganlili.commonservice.model.User;
-import com.njganlili.interfaces.consumer.UserService;
+import com.njganlili.commonservice.entity.User;
+import com.njganlili.interfaces.provider.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -9,12 +10,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
@@ -93,11 +91,25 @@ public class UserController {
 //        String url = "http://provider-service/user/add";
         String url = "http://127.0.0.1:8003/user/add";
         User user =new User();
+        user.setUserName("miky");
+        user.setUserAge(0);
+        user.setUserSex("MAN");
+        user.setUserIdCard("111111111111");
+        user.setRevision("2");
+        user.setCreatedBy("miky");
+        user.setCreatedTime(new Date());
+        user.setUpdatedBy("miky");
+        user.setUpdatedTime(new Date());
+        user.setId("1");
+
         logger.info("sssssss");
 //        Integer result =  restTemplate.postForObject(url,user,Integer.class);
         Integer result = Integer.valueOf(10);
         Optional<Integer> optionalS = Optional.ofNullable(result);
         System.out.println(optionalS.orElse(0));
+        if (optionalS.isPresent()){
+            throw new RuntimeException();
+        }
         return result;
     }
 

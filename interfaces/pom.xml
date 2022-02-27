@@ -6,7 +6,7 @@
         <groupId>com.njganlili</groupId>
         <artifactId>parent</artifactId>
         <version>1.0.0</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../parent/pom.xml</relativePath>
     </parent>
     <artifactId>interfaces</artifactId>
     <version>1.0.0</version>
@@ -16,6 +16,10 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-extension</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.njganlili</groupId>
             <artifactId>commonService</artifactId>

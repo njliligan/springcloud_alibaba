@@ -3,13 +3,6 @@ spring:
     name: provider-service
   profiles:
     active: local
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    #MySQL配置
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://172.18.0.3:3306/miky?useUnicode=true&characterEncoding=UTF-8&useSSL=false
-    username: root
-    password:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss # 如果使用字符串表示，用这行设置格式
     timezone: GMT+8

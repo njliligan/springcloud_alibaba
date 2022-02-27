@@ -13,3 +13,10 @@ spring:
         enabled: true
         group: DEV_GROUP
         namespace: 3ee843f9-70ee-4701-9ad3-75aa5a35563b
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    #MySQL配置
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.18.0.3:3306/miky?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false
+    username: root
+    password: root
