@@ -21,10 +21,5 @@ public class ConsumeServiceApplication {
         SpringApplication.run(ConsumeServiceApplication.class, args);
     }
 
-    @Bean
-//    @LoadBalanced //这里就必须使用服务名
-    public RestTemplate restTemplate(){
-        return new RestTemplate();
-    }
 
 }

@@ -1,4 +1,5 @@
 package com.njganlili.consumeservice.controller;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.njganlili.commonservice.entity.User;
@@ -22,37 +23,12 @@ import java.util.Optional;
  * @date 2022/2/21 15:59
  */
 @javax.annotation.Generated(value = "org.springdoc.demo.app2.codegen.languages.SpringCodegen", date = "2019-07-11T00:09:29.839+02:00[Europe/Paris]")
-
-//@SecurityScheme(name = "petstore_auth", type = SecuritySchemeType.OAUTH2, flows = @OAuthFlows(implicit = @OAuthFlow(authorizationUrl = "https://petstore3.swagger.io/oauth/authorize", scopes = {
-//        @OAuthScope(name = "write:pets", description = "modify pets in your account"),
-//        @OAuthScope(name = "read:pets", description = "read your pets") })))
-
 @RestController
 @RequestMapping("/user")
 @Tag(name = "UserController",description = "用户操作")
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
-    //会自动转为Post，如果要解决，那就必须加上@RequestParam(“name”)，或者更更换httpClient
-    //feign:
-    //  httpclient:
-    //    enabled: true
-    //依赖
-    //		<dependency>
-    //            <groupId>org.apache.httpcomponents</groupId>
-    //            <artifactId>httpclient</artifactId>
-    //            <version>4.5.9</version>
-    //        </dependency>
-    //        <dependency>
-    //            <groupId>io.github.openfeign</groupId>
-    //            <artifactId>feign-httpclient</artifactId>
-    //            <version>10.2.3</version>
-    //        </dependency>
-
-//    @Autowired
-//    private RestTemplate restTemplate;
-
     @DubboReference
     private UserService userService;
 
@@ -68,14 +44,19 @@ public class UserController {
                     @ApiResponse(responseCode = "404", description = "Order not found", content = @Content)
             }
     )
-//    @Parameters(
-//            value = {
-//                    @Parameter(required = false,schema = @Schema(implementation = User.class))
-//            }
-//    )
+
     @PostMapping(value = "/addUser", consumes = { "application/json", "application/xml", "application/x-www-form-urlencoded" })
     public Integer addUserByFeign(@RequestBody User user){
-//        Integer result = feignClients.addUser(user);
+        user.setUserName("miky");
+        user.setUserAge(0);
+        user.setUserSex("MAN");
+        user.setUserIdCard("111111111111");
+        user.setRevision("2");
+        user.setCreatedBy("miky");
+        user.setCreatedTime(LocalDateTime.now());
+        user.setUpdatedBy("miky");
+        user.setUpdatedTime(LocalDateTime.now());
+        user.setId(Integer.getInteger(String.valueOf(Math.random()*(1000))).toString());
         Integer result = userService.addUser(user);
         logger.info(String.valueOf(result));
         return result;
@@ -97,10 +78,10 @@ public class UserController {
         user.setUserIdCard("111111111111");
         user.setRevision("2");
         user.setCreatedBy("miky");
-        user.setCreatedTime(new Date());
+        user.setCreatedTime(LocalDateTime.now());
         user.setUpdatedBy("miky");
-        user.setUpdatedTime(new Date());
-        user.setId("1");
+        user.setUpdatedTime(LocalDateTime.now());
+        user.setId(Integer.getInteger(String.valueOf(Math.random()*(1000))).toString());
 
         logger.info("sssssss");
 //        Integer result =  restTemplate.postForObject(url,user,Integer.class);

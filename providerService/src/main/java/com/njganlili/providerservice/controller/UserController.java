@@ -3,7 +3,6 @@ package com.njganlili.providerservice.controller;
 
 import com.njganlili.commonservice.entity.User;
 import com.njganlili.interfaces.provider.service.UserService;
-import com.njganlili.providerservice.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,10 +35,10 @@ public class UserController {
 
     @PostMapping("/add")
     public Integer addUser(@RequestBody User user){
-        Integer b = userService.addUser(user);
+        Integer result = userService.addUser(user);
         System.out.println("received msg.........");
         System.out.println(info);
-        return b;
+        return result;
     }
 
 }

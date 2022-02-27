@@ -40,7 +40,6 @@ public class MyBatisPlusGenerator {
             // 全局配置
             .globalConfig(builder ->
                     builder.author("miky")
-                            .enableSwagger()
                             .commentDate("yyyy-MM-dd")
                             .fileOverride())
             // 包配置
