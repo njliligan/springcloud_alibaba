@@ -30,6 +30,12 @@
 
     <dependencyManagement>
         <dependencies>
+<!--            验证框架-->
+            <dependency>
+                <groupId>net.sf.oval</groupId>
+                <artifactId>oval</artifactId>
+                <version>3.2.0</version>
+            </dependency>
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
@@ -41,19 +47,19 @@
                 <artifactId>lombok</artifactId>
                 <version>1.18.22</version>
             </dependency>
-            <!--velocity模板-->
+<!--            velocity模板-->
             <dependency>
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity-engine-core</artifactId>
                 <version>2.3</version>
             </dependency>
-            <!--freemarker模板-->
+<!--             freemarker模板-->
             <dependency>
                 <groupId>org.freemarker</groupId>
                 <artifactId>freemarker</artifactId>
                 <version>2.3.31</version>
             </dependency>
-
+<!--        mybatis-plus-->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-annotation</artifactId>
@@ -74,7 +80,7 @@
                 <artifactId>mybatis-plus-generator</artifactId>
                 <version>3.5.1</version>
             </dependency>
-
+<!--            seata-->
             <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-starter-alibaba-seata -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
@@ -175,6 +181,17 @@
                 <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.kafka</groupId>-->
+<!--                <artifactId>spring-kafka</artifactId>-->
+<!--            </dependency>-->
+            <!-- Spring Cloud Kafka-->
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-bus-kafka -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-bus-kafka</artifactId>
+                <version>3.1.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -12,6 +12,9 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.Setter;
+import net.sf.oval.constraint.Assert;
+import net.sf.oval.constraint.NotBlank;
+
 
 /**
  * <p>
@@ -32,6 +35,7 @@ public class User implements Serializable {
     private String id;
 
     @TableField("user_name")
+    @Assert(expr = "_value != '1' ",lang = "javascript", message = "很抱歉，暂时只支持线下打款方式")
     private String userName;
 
     @TableField("user_age")
@@ -41,6 +45,7 @@ public class User implements Serializable {
     private String userSex;
 
     @TableField("user_id_card")
+    @NotBlank(message = "idcard 不能为空",when = "javascript:_this.userName == '1'")
     private String userIdCard;
 
     @TableField("revision")
