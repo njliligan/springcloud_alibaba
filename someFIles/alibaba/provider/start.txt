@@ -1,0 +1,1 @@
+docker run -p 8002:8002 --network b45a866e6991 --ip 172.18.0.6 --name consumer -d c9e996201891
