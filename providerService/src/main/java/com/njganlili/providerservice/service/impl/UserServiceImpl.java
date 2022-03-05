@@ -23,6 +23,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Value("${dates.b}")
     private int b;
 
+    @Override
     @GlobalTransactional
     public Integer addUser(User user){
         return this.baseMapper.insert(user);
